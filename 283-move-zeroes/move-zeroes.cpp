@@ -1,13 +1,20 @@
 class Solution {
 public:
-    // brute force
     void moveZeroes(vector<int>& nums) {
-        int n = nums.size();
-        for (int i=0; i<n; i++){
-            for (int j=i+1; j<n; j++){
-                if (nums[i]==0){
-                    swap(nums[i], nums[j]);
-                }
+        int j=-1;
+        for (int i=0; i<nums.size(); i++){
+            if (nums[i] == 0){
+                j = i;
+                break;
+            }
+        }
+
+        if (j==-1) return;
+
+        for (int i=j+1; i<nums.size(); i++){
+            if (nums[i] != 0){
+                swap(nums[i], nums[j]);
+                j++;
             }
         }
     }
