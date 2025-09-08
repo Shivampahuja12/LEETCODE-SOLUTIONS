@@ -1,17 +1,28 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        int n = nums.size();
-        int idx;
-        bool flag = false;
-        for (int i=0; i<n; i++){
-            if (target == nums[i]) {
-                flag = true;
-                idx = i;
-                break;
+        int lo = 0, hi = nums.size()-1;
+        int mid;
+        while (lo<=hi){
+            mid = lo + (hi-lo)/2;
+            if (target == nums[mid]) return mid;
+            if (nums[lo] <= nums[mid]){
+                if (target >= nums[lo] && target < nums[mid]){
+                    hi = mid - 1;
+                }
+                else {
+                    lo = mid + 1;
+                }
+            }
+            else {
+                if (target > nums[mid] && target <= nums[hi]){
+                    lo = mid + 1;
+                }
+                else {
+                    hi = mid -1;
+                }
             }
         }
-        if (flag == true) return idx;
-        else return -1;
+        return -1;
     }
 };
