@@ -1,5 +1,6 @@
 class Solution {
     public void moveZeroes(int[] nums) {
+        /* // brute
         for (int i=0; i<nums.length; i++){
             for (int j=i+1; j<nums.length; j++){
                 if (nums[i] == 0){
@@ -8,6 +9,18 @@ class Solution {
                     nums[j] = temp;
                 }
             }
+        } */
+
+        // optimized - two pointer/ in-place
+        int idx = 0;
+        for (int i=0; i<nums.length; i++){
+            if (nums[i] != 0){
+                nums[idx++] = nums[i];
+            }
+        }
+
+        for (int i=idx; i<nums.length; i++){
+            nums[i] = 0;
         }
     }
 }
