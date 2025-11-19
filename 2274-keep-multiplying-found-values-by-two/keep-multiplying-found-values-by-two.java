@@ -1,7 +1,6 @@
 class Solution {
     public int findFinalValue(int[] nums, int original) {
         
-        boolean n = true;
         while (true){
 
             boolean isFound = false;
@@ -16,12 +15,6 @@ class Solution {
             if (isFound == false){
                 return original;
             }
-            else {
-                n = false;
-            }
-
         }
-        // return original;
-
     }
 }
