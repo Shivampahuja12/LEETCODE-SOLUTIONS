@@ -9,7 +9,7 @@ class Solution {
             }
             else {
                 still++;
-                nums[still] = nums[vary];
+                nums[still] = nums[vary++];
             }
         }
         return still+1;
