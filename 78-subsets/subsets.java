@@ -7,7 +7,6 @@ class Solution {
     }
     public static void subs(int i, int[] a, List<List<Integer>> list, List<Integer> smlList){
         if (i == a.length) {
-            // list.add(smlList);
             list.add(new ArrayList(smlList));
             return;
         }
