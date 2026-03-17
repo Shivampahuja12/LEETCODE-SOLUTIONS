@@ -1,16 +1,18 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        HashMap<Integer, Integer> mpp = new HashMap<>();
-        for (int i=0; i<nums.length; i++){
-            mpp.put(nums[i], mpp.getOrDefault(nums[i], 0) + 1);
-        }
-
-        for (Map.Entry<Integer, Integer> entry: mpp.entrySet()){
-            if (entry.getValue() == 1){
-                return entry.getKey();
+        Arrays.sort(nums);
+        int check = 0;
+        for (int i=1; i<nums.length; i++){
+            if (i % 3 == 0){
+                check = 0;
+                continue;
             }
+            else if (nums[i] != nums[i-1]){
+                return nums[i-1];
+            }
+            check++;
         }
 
-        return 0;
+        return nums[nums.length-1];
     }
 }
