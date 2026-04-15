@@ -1,31 +1,32 @@
 class MyStack {
 
-    Deque<Integer> stack = new ArrayDeque<>();
-
+    Queue<Integer> q;
     public MyStack() {
+        q = new LinkedList<>();
     }
-
+    
     public void push(int x) {
-        if (stack.size() == 0) {
-            stack.addFirst(x);
-        } else {
-            stack.addLast(x);
+        
+        q.add(x);
+        if (q.size() >= 2){
+            for (int i=0; i<q.size()-1; i++){
+                q.add(q.peek());
+                q.remove();
+            }
         }
     }
-
+    
     public int pop() {
-        return stack.removeLast();
+        return q.poll();
+        
     }
-
+    
     public int top() {
-        return stack.getLast();
+        return q.peek();
     }
-
+    
     public boolean empty() {
-        if (stack.size() == 0)
-            return true;
-        else
-            return false;
+        return q.size() == 0;
     }
 }
 
