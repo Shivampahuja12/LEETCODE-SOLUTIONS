@@ -25,24 +25,24 @@ class Solution {
             return;
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
+        boolean flag = true;
         while (!q.isEmpty()) {
             int size = q.size();
             List<Integer> inner = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
                 TreeNode node = q.poll();
-                inner.add(node.val);
+                if (flag) {
+                    inner.add(node.val);
+                } else {
+                    inner.addFirst(node.val);
+                }
                 if (node.left != null)
                     q.add(node.left);
                 if (node.right != null)
                     q.add(node.right);
             }
-            if (level % 2 != 0) {
-                Collections.reverse(inner);
-                outer.add(inner);
-            } else {
-                outer.add(inner);
-            }
-            level++;
+            outer.add(inner);
+            flag = !flag;
         }
     }
 }
