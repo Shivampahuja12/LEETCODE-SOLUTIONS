@@ -3,25 +3,21 @@ class Solution {
         int lo = 0;
         int hi = nums.length - 1;
         int mid;
-
-        while (lo <= hi){
-            mid = lo + (hi - lo)/2;
-            if (target == nums[mid]){
+        while (lo <= hi) {
+            mid = lo + (hi - lo) / 2;
+            if (nums[mid] == target) {
                 return mid;
             }
-            else if (nums[lo] <= nums[mid]){
-                if (nums[mid] > target && target >= nums[lo]){
-                    hi = mid - 1; 
-                }
-                else {
+            if (nums[lo] <= nums[mid]) {
+                if (target >= nums[lo] && target < nums[mid]) {
+                    hi = mid - 1;
+                } else {
                     lo = mid + 1;
                 }
-            }
-            else {
-                if (target <= nums[hi] && target > nums[mid]){
+            } else {
+                if (target > nums[mid] && target <= nums[hi]) {
                     lo = mid + 1;
-                }
-                else {
+                } else {
                     hi = mid - 1;
                 }
             }
