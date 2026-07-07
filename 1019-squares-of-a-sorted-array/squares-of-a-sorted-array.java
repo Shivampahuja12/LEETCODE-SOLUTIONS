@@ -1,61 +1,67 @@
 class Solution {
     public int[] sortedSquares(int[] nums) {
-        int idx = -1;
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i] < 0 && nums[i + 1] >= 0) {
-                idx = i;
-                break;
+        int n = nums.length;
+        if (nums[n - 1] < 0) {
+            square(nums);
+            reverse(nums);
+            return nums;
+        } else {
+            int neg = 0;
+            while (nums[neg] < 0) {
+                neg++;
             }
-        }
+            int[] negs = new int[neg];
+            int[] pos = new int[n - neg];
 
-        int[] resultantArray = new int[nums.length];
+            for (int i = 0; i < neg; i++) {
+                negs[i] = nums[i] * nums[i];
+            }
+            int k = 0;
+            for (int i = neg; i < n; i++) {
+                pos[k++] = nums[i] * nums[i];
+            }
+            reverse(negs);
+            int[] merged = mergedArr(negs, pos);
+            return merged;
+        }
+    }
+
+    public void square(int[] a) {
+        for (int i = 0; i < a.length; i++) {
+            a[i] = a[i] * a[i];
+        }
+    }
+
+    public int[] mergedArr(int[] a1, int[] a2) {
+        int i = 0;
+        int j = 0;
         int k = 0;
-
-        // CASE: All numbers are non-negative
-        if (idx == -1 && nums[0] >= 0) {
-            for (int i = 0; i < nums.length; i++) {
-                resultantArray[k++] = nums[i] * nums[i];
+        int[] result = new int[a1.length + a2.length];
+        while (i < a1.length && j < a2.length) {
+            if (a1[i] < a2[j]) {
+                result[k++] = a1[i++];
+            } else {
+                result[k++] = a2[j++];
             }
         }
-
-        // CASE: All numbers are negative
-        else if (idx == -1 && nums[nums.length - 1] < 0) {
-            int start = nums.length - 1;
-            while (start >= 0) {
-                resultantArray[k++] = nums[start] * nums[start];
-                start--; //
-            }
+        while (i < a1.length) {
+            result[k++] = a1[i++];
         }
-
-        // CASE: Mixed negative and positive
-        else {
-            int lo = idx;
-            int hi = idx + 1;
-
-            while (lo >= 0 && hi < nums.length) {
-                int small = nums[lo] * nums[lo];
-                int large = nums[hi] * nums[hi];
-
-                if (small <= large) {
-                    resultantArray[k++] = small;
-                    lo--;
-                } else {
-                    resultantArray[k++] = large;
-                    hi++;
-                }
-            }
-
-            while (lo >= 0) {
-                resultantArray[k++] = nums[lo] * nums[lo];
-                lo--;
-            }
-
-            while (hi <= nums.length - 1) {
-                resultantArray[k++] = nums[hi] * nums[hi];
-                hi++;
-            }
+        while (j < a2.length) {
+            result[k++] = a2[j++];
         }
+        return result;
+    }
 
-        return resultantArray;
+    public void reverse(int[] a) {
+        int i = 0;
+        int j = a.length - 1;
+        while (i < j) {
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+            i++;
+            j--;
+        }
     }
 }
