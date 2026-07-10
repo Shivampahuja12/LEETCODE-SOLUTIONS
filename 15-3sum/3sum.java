@@ -1,33 +1,27 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        
-        // Store unique triplets
-        Set<List<Integer>> ans = new HashSet<>();
-
-        // First loop for first element
-        for (int i = 0; i < nums.length; i++) {
-
-            // Set to store elements seen in this iteration
-            Set<Integer> set = new HashSet<>();
-
-            // Second loop for second element
-            for (int j = i + 1; j < nums.length; j++) {
-
-                // Calculate third element needed
-                int third = -(nums[i] + nums[j]);
-
-                // If third already in set, we found a triplet
-                if (set.contains(third)) {
-                    List<Integer> list = Arrays.asList(nums[i], nums[j], third);
-                    Collections.sort(list);
-                    ans.add(list);
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int j = i + 1;
+            int k = nums.length - 1;
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if (sum < 0) {
+                    j++;
+                } else if (sum > 0) {
+                    k--;
+                } else {
+                    List<Integer> temp = Arrays.asList(nums[i], nums[j], nums[k]);
+                    ans.add(temp);
+                    j++;
+                    k--;
+                    while (j < k && nums[j] == nums[j - 1]) j++;
+                    while (j < k && nums[k] == nums[k + 1]) k--;
                 }
-
-                // Add current element to set
-                set.add(nums[j]);
             }
         }
-        // Convert set to list
-        return new ArrayList<>(ans);
+        return ans;
     }
 }
