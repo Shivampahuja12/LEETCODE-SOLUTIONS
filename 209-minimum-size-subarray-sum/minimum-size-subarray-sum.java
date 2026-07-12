@@ -14,6 +14,7 @@ class Solution {
                 left++;
             }
         }
+        System.gc();
         return minLen == Integer.MAX_VALUE ? 0 : minLen;
     }
 }
