@@ -15,25 +15,18 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        if (root == null)
-            return new ArrayList<Integer>();
         List<Integer> list = new ArrayList<>();
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        while (!q.isEmpty()) {
-            int size = q.size();
-            int view = Integer.MAX_VALUE;
-            for (int i = 0; i < size; i++) {
-                TreeNode node = q.poll();
-                if (node != null)
-                    view = node.val;
-                if (node.left != null)
-                    q.add(node.left);
-                if (node.right != null)
-                    q.add(node.right);
-            }
-            list.add(view);
-        }
+        dfs(root, 0, list);
         return list;
+    }
+
+    public static void dfs(TreeNode root, int level, List<Integer> list) {
+        if (root == null)
+            return;
+        if (level == list.size()) {
+            list.add(root.val);
+        }
+        dfs(root.right, level + 1, list);
+        dfs(root.left, level + 1, list);
     }
 }
