@@ -12,6 +12,7 @@ class Solution {
             profit = Math.max(profit, prices[i] - buy);
             i++;
         }
+        System.gc();
         return profit;
     }
 }
