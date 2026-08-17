@@ -3,7 +3,6 @@ class Solution {
         if (prices.length == 1) return 0;
         int profit = 0;
         int buy = prices[0];
-        int sell = prices[1];
         int i = 1;
         while (i < prices.length) {
             if (prices[i] < buy) {
