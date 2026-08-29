@@ -2,14 +2,12 @@ class Solution {
     public void rotate(int[] nums, int k) {
         int n = nums.length;
         k = k % n;
-        if (k == 0) return;
-        rotate(0, n - 1, nums);
-        rotate(0, k - 1, nums);
-        rotate(k, n - 1, nums);
-        System.gc();
+        rotates(0, n - 1, nums);
+        rotates(0, k - 1, nums);
+        rotates(k, n - 1, nums);
     }
 
-    static void rotate(int i, int j, int[] a) {
+    void rotates(int i, int j, int[] a) {
         while (i < j) {
             int temp = a[i];
             a[i] = a[j];
@@ -17,6 +15,5 @@ class Solution {
             i++;
             j--;
         }
-        System.out.println(Arrays.toString(a));
     }
 }
