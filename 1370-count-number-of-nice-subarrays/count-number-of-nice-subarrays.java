@@ -21,6 +21,7 @@ class Solution {
             }
             map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
+        System.gc();
         return ans;
     }
 }
