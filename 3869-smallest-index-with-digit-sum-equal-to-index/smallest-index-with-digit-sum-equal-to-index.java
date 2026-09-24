@@ -2,10 +2,8 @@ class Solution {
     public int smallestIndex(int[] nums) {
         int n = nums.length;
         for (int i = 0; i < n; i++) {
-            nums[i] = digitSum(nums[i]);
-        }
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == i)
+            int num = digitSum(nums[i]);
+            if (num == i)
                 return i;
         }
         return -1;
