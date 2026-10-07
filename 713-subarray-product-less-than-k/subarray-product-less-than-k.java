@@ -14,7 +14,6 @@ class Solution {
             }
             c += right - left + 1;
         }
-        System.gc();
         return c;
     }
 }
