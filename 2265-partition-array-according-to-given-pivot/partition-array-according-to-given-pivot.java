@@ -13,18 +13,17 @@ class Solution {
             else
                 right.add(nums[i]);
         }
-        
-        int[] arr = new int[n];
+
         int idx = 0;
         for (int i : left) {
-            arr[idx++] = i;
+            nums[idx++] = i;
         }
         for (int i : eql) {
-            arr[idx++] = i;
+            nums[idx++] = i;
         }
         for (int i : right) {
-            arr[idx++] = i;
+            nums[idx++] = i;
         }
-        return arr;
+        return nums;
     }
 }
