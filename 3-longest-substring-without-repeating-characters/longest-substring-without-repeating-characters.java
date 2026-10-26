@@ -15,7 +15,7 @@ class Solution {
                 }
                 l++;
             }
-            size = Math.max(size, map.size());
+            size = Math.max(size, r - l + 1);
             r++;
         }
         return size;
