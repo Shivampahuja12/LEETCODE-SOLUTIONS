@@ -1,22 +1,24 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
+        // taking some elements and removing some
         List<List<Integer>> list = new ArrayList<>();
         List<Integer> inner = new ArrayList<>();
-        subset(list, inner, 0, nums);
+        subset(nums, inner, list, 0);
         return list;
     }
 
-    public void subset(List<List<Integer>> list, List<Integer> inner, int i, int[] arr) {
-
-        if (i == arr.length) {
+    public void subset(int[] nums, List<Integer> inner, List<List<Integer>> list, int i) {
+        if (i == nums.length) {
             list.add(new ArrayList(inner));
             return;
         }
 
-        inner.add(arr[i]);
-        subset(list, inner, i + 1, arr);
-
+        //take
+        inner.add(nums[i]);
+        subset(nums, inner, list, i + 1);
+        //not-take
         inner.remove(inner.size() - 1);
-        subset(list, inner, i + 1, arr);
+        subset(nums, inner, list, i + 1);
     }
+
 }
