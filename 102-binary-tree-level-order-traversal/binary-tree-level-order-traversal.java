@@ -16,25 +16,20 @@
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
-        levelOrderTraversal(list, root);
-        return list;
-    }
-
-    public void levelOrderTraversal(List<List<Integer>> outer, TreeNode root){
-        if (root == null) return;
+        if (root == null) return list;
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         while (!q.isEmpty()){
-            int size = q.size();
-            List<Integer> inner = new ArrayList<>();
-            for (int i=0; i<size; i++){
-                TreeNode value = q.poll();
-                inner.add(value.val);
-                if (value.left != null) q.add(value.left);
-                if (value.right != null) q.add(value.right);
+            int n = q.size();
+            List<Integer> in = new ArrayList<>();
+            for (int i=0; i<n; i++){
+                TreeNode p = q.poll();
+                in.add(p.val);
+                if (p.left != null) q.add(p.left);
+                if (p.right != null) q.add(p.right);
             }
-            outer.add(inner);
+            list.add(new ArrayList<>(in));
         }
-
+        return list;
     }
 }
